@@ -21,6 +21,7 @@ func (p *UnixProcess) Refresh() error {
 	binStart := strings.IndexRune(data, '(') + 1
 	binEnd := strings.IndexRune(data[binStart:], ')')
 	p.binary = data[binStart : binStart+binEnd]
+	p.cmdLine = fmt.Sprintf("/proc/%d/cmdline", p.pid)
 
 	// Move past the image name and start parsing the rest
 	data = data[binStart+binEnd+2:]
